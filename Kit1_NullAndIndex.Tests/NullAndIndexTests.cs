@@ -7,19 +7,27 @@ namespace Kit1_NullAndIndex.Tests
     public class NullAndIndexTests
     {
         [Trait("TestCategory", "Nulls")]
-        [Fact(DisplayName = "NullReferenceException when name is null")]
-        public void NullReference_on_Null_String()
+        [Fact(DisplayName = "ArgumentNullException when name is null")]
+        public void ArgumentNull_on_Null_String()
         {
             string? name = null;
-            Assert.Throws<NullReferenceException>(() => DangerousOps.LengthOfName(name));
+            Assert.Throws<ArgumentNullException>(() => DangerousOps.LengthOfName(name));
         }
 
         [Trait("TestCategory", "Index")]
-        [Fact(DisplayName = "IndexOutOfRangeException on invalid index")]
-        public void IndexOutOfRange_on_Invalid_Index()
+        [Fact(DisplayName = "ArgumentOutOfRangeException on invalid index")]
+        public void ArgumentOutOfRange_on_Invalid_Index()
         {
             var data = DangerousOps.MakeArray(3);
-            Assert.Throws<IndexOutOfRangeException>(() => DangerousOps.GetAt(data, 10));
+            Assert.Throws<ArgumentOutOfRangeException>(() => DangerousOps.GetAt(data, 10));
+        }
+
+        [Trait("TestCategory", "Index")]
+        [Fact(DisplayName = "ArgumentNullException on null array")]
+        public void ArgumentNull_on_Null_Array()
+        {
+            int[]? data = null;
+            Assert.Throws<ArgumentNullException>(() => DangerousOps.GetAt(data, 0));
         }
 
         [Trait("TestCategory", "HappyPath")]
