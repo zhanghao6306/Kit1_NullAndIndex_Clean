@@ -20,7 +20,14 @@ namespace Kit1_NullAndIndex.Tests
         {
             var data = DangerousOps.MakeArray(3);
             Assert.Throws<IndexOutOfRangeException>(() => DangerousOps.GetAt(data, 10));
-            var len = data.Length;
+        }
+
+        [Trait("TestCategory", "HappyPath")]
+        [Fact(DisplayName = "No exception on valid input")]
+        public void No_Exception_On_Valid()
+        {
+            var data = DangerousOps.MakeArray(3);
+            var len = DangerousOps.LengthOfName("abc");
             Assert.Equal(3, len);
             Assert.Equal(2, DangerousOps.GetAt(data, 1));
         }
